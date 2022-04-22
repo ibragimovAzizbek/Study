@@ -3,7 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:studyapp/core/constants/color_const.dart';
 import 'package:studyapp/core/constants/font_const.dart';
-import 'package:studyapp/core/widgets/input_user.dart';
+import 'package:studyapp/core/widgets/input/input_user_email.dart';
+import 'package:studyapp/core/widgets/input/input_user_name.dart';
+import 'package:studyapp/core/widgets/input/input_user_number.dart';
+import 'package:studyapp/core/widgets/input/input_user_password.dart';
 import 'package:studyapp/core/widgets/my_app_bar.dart';
 import 'package:studyapp/core/widgets/show_snack_bar.dart';
 import 'package:studyapp/providers/check_provider.dart';
@@ -26,24 +29,24 @@ class SignUp extends StatelessWidget {
               key: formKey,
               child: Column(
                 children: [
-                  InputUserCredintial(
+                  InputUserName(
                     title: "Name",
                     hintText: "Your name",
                     controller: context.watch<SignProvider>().nameController,
                   ),
                   SizedBox(height: FontConst.kMediumFont),
-                  InputUserCredintial(
+                  InputUserEmail(
                     title: "Email",
                     hintText: "study@email.com",
                     controller: context.watch<SignProvider>().emailController,
                   ),
-                  InputUserCredintial(
+                  InputUserPassword(
                     title: "Password",
                     hintText: "Your password",
                     controller:
                         context.watch<SignProvider>().passwordController,
                   ),
-                  InputUserCredintial(
+                  InputUserNumber(
                     title: "Phone number",
                     hintText: "+998 xx xxx xx xx",
                     controller:
@@ -88,18 +91,20 @@ class SignUp extends StatelessWidget {
                 ),
               ),
               onPressed: () {
-                if (Provider.of<CheckProvider>(context, listen: false)
-                    .checkController) {
-                  showDialog(
-                    context: context,
-                    builder: (_) => const AlertDialog(
-                      title:
-                          Center(child: CircularProgressIndicator.adaptive()),
-                    ),
-                  );
-                  context.read<SignProvider>().registerProvider(context);
-                } else {
-                  ShowMySnackBar.mySnackBar(context, 'Agree to the terms.');
+                if (formKey.currentState!.validate()) {
+                  if (Provider.of<CheckProvider>(context, listen: false)
+                      .checkController) {
+                    showDialog(
+                      context: context,
+                      builder: (_) => const AlertDialog(
+                        title:
+                            Center(child: CircularProgressIndicator.adaptive()),
+                      ),
+                    );
+                    context.read<SignProvider>().registerProvider(context);
+                  } else {
+                    ShowMySnackBar.mySnackBar(context, 'Agree to the terms.');
+                  }
                 }
               },
             ),

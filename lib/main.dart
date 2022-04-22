@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:studyapp/core/components/theme_comp.dart';
+import 'package:studyapp/providers/admin_catigory_provider.dart';
 import 'package:studyapp/providers/bottom_bar_provider.dart';
 import 'package:studyapp/providers/calendar_icon_provider.dart';
 import 'package:studyapp/providers/catigory_provider_course.dart';
@@ -21,7 +22,9 @@ void main() async {
         ChangeNotifierProvider(create: ((context) => BottomBarProvider())),
         ChangeNotifierProvider(create: ((context) => RouteProvider())),
         ChangeNotifierProvider(create: ((context) => CourseCatigoryProvider())),
-        ChangeNotifierProvider(create: ((context) => CalendarIconSetProvider())),
+        ChangeNotifierProvider(
+            create: ((context) => CalendarIconSetProvider())),
+        ChangeNotifierProvider(create: ((context) => AdminPanelCatigory())),
       ],
       child: MyApp(),
     ),
@@ -39,7 +42,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Study app',
       theme: ThemeComp.themeComp,
-      initialRoute: context.read<RouteProvider>().route,
+      initialRoute: context.watch<RouteProvider>().route,
       onGenerateRoute: _myRoute.onGenerateRoute,
     );
   }

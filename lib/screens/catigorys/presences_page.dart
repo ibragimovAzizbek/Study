@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:studyapp/core/widgets/my_appbar.dart';
+import 'package:studyapp/core/widgets/my_app_bar.dart';
 
 class PresencesPage extends StatelessWidget {
   const PresencesPage({Key? key}) : super(key: key);

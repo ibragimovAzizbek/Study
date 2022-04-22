@@ -64,6 +64,13 @@ class SignProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  // ? User logOut
+
+  userLogOut() {
+    FireService.auth.signOut();
+    notifyListeners();
+  }
+
   // ? User DATA RED FIREBASE
 
   redUserProvider(BuildContext context) async {

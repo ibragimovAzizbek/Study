@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:studyapp/screens/admin/admin_page.dart';
 import 'package:studyapp/screens/catigorys/course_page.dart';
 import 'package:studyapp/screens/catigorys/presences_page.dart';
 import 'package:studyapp/screens/catigorys/subjects_page.dart';
@@ -13,6 +14,8 @@ class MyRoute {
     var args = settings.arguments;
 
     switch (settings.name) {
+      case '/admin':
+        return MaterialPageRoute(builder: (_) => AdminPage());
       case '/cover':
         return MaterialPageRoute(builder: (_) => const CoverPage());
       case '/secondPage':

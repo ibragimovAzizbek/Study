@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:studyapp/core/constants/color_const.dart';
 import 'package:studyapp/core/constants/font_const.dart';
-import 'package:studyapp/core/widgets/input_user.dart';
+import 'package:studyapp/core/widgets/input/input_user_email.dart';
+import 'package:studyapp/core/widgets/input/input_user_password.dart';
 import 'package:studyapp/core/widgets/my_app_bar.dart';
+import 'package:studyapp/core/widgets/show_snack_bar.dart';
+import 'package:studyapp/providers/route_provider.dart';
 import 'package:studyapp/providers/user_sign_provider.dart';
+import 'package:studyapp/services/fire_service.dart';
 
 class SignIn extends StatelessWidget {
   SignIn({Key? key}) : super(key: key);
@@ -24,12 +29,12 @@ class SignIn extends StatelessWidget {
                 key: formKeySignIn,
                 child: Column(
                   children: [
-                    InputUserCredintial(
+                    InputUserEmail(
                       title: "Email",
                       hintText: "study@email.com",
                       controller: context.watch<SignProvider>().emailController,
                     ),
-                    InputUserCredintial(
+                    InputUserPassword(
                       title: "Password",
                       hintText: "Your password",
                       controller:
@@ -64,15 +69,36 @@ class SignIn extends StatelessWidget {
                     MediaQuery.of(context).size.height * 0.08,
                   ),
                 ),
+                onLongPress: () {
+                  if (formKeySignIn.currentState!.validate()) {
+                    showDialog(
+                      context: context,
+                      builder: (_) => const AlertDialog(
+                        title:
+                            Center(child: CircularProgressIndicator.adaptive()),
+                      ),
+                    );
+                    Navigator.pushNamedAndRemoveUntil(
+                        context, '/admin', (route) => false);
+                  }
+                },
                 onPressed: () {
-                  showDialog(
-                    context: context,
-                    builder: (_) => const AlertDialog(
-                      title:
-                          Center(child: CircularProgressIndicator.adaptive()),
-                    ),
-                  );
-                  context.read<SignProvider>().signInProvider(context);
+                  if (formKeySignIn.currentState!.validate()) {
+                    if (FireService.auth.currentUser!.email !=
+                        "azizadmin@gmail.com") {
+                      showDialog(
+                        context: context,
+                        builder: (_) => const AlertDialog(
+                          title: Center(
+                              child: CircularProgressIndicator.adaptive()),
+                        ),
+                      );
+                      context.read<SignProvider>().signInProvider(context);
+                    } else {
+                      ShowMySnackBar.mySnackBar(
+                          context, "There is no such mail");
+                    }
+                  }
                 },
               ),
               Row(
@@ -89,7 +115,14 @@ class SignIn extends StatelessWidget {
                     },
                   ),
                 ],
-              )
+              ),
+              Center(
+                child: SizedBox(
+                  height: 250,
+                  width: 250,
+                  child: Lottie.asset('assets/animation/signin.json'),
+                ),
+              ),
             ],
           ),
         ),

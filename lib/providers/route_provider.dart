@@ -6,8 +6,8 @@ class RouteProvider extends ChangeNotifier {
     checkLoginPage();
   }
 
-  String route = '/signin';
+  String route = '/cover';
   checkLoginPage() {
-    FireService.auth.currentUser != null ? route = '/home' : '/signin';
+    FireService.auth.currentUser != null ? route = '/home' : '/cover';
   }
 }
