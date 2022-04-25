@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "540201922538",
-    "project_id": "study-app-68d50",
-    "storage_bucket": "study-app-68d50.appspot.com"
+    "project_number": "646803068641",
+    "project_id": "study-app-d9bfc",
+    "storage_bucket": "study-app-d9bfc.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:540201922538:android:55cdd714467e7ab82b0c93",
+        "mobilesdk_app_id": "1:646803068641:android:9905ac17e42a73ef8909a0",
         "android_client_info": {
           "package_name": "com.ibragimovazizbek.studyapp"
         }
       },
       "oauth_client": [
         {
-          "client_id": "540201922538-t2pmcngupl2e2cs4je4fibnmsm3lt2mh.apps.googleusercontent.com",
+          "client_id": "646803068641-r9vn5p3e8i30tv7arvb7lpltt9e6sg8d.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDdnuMmlg8HsqKBAdCZRIwXC6CnoOV2cJA"
+          "current_key": "AIzaSyAF6P8ln58OfAvx0bs9uonsVExqmbM3Wsg"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "540201922538-t2pmcngupl2e2cs4je4fibnmsm3lt2mh.apps.googleusercontent.com",
+              "client_id": "646803068641-r9vn5p3e8i30tv7arvb7lpltt9e6sg8d.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

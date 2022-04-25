@@ -26,10 +26,9 @@ class InputUserNumber extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(15.0),
           child: TextFormField(
-            keyboardType: TextInputType.number,
+            keyboardType: TextInputType.phone,
             textInputAction: TextInputAction.done,
             controller: controller,
-            obscureText: isShowPassword,
             decoration: InputDecoration(
               hintText: hintText,
               border: OutlineInputBorder(
@@ -37,7 +36,7 @@ class InputUserNumber extends StatelessWidget {
               ),
             ),
             validator: (number) {
-              if (number!.length != 13) {
+              if (!RegExp(r'(^(?:[+0]9)?[0-9]{10,12}$)').hasMatch(number!)) {
                 return "Phone number error";
               } else {
                 return null;

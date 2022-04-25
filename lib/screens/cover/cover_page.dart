@@ -1,8 +1,11 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 import 'package:studyapp/core/constants/color_const.dart';
 import 'package:studyapp/core/constants/font_const.dart';
+import 'package:studyapp/providers/user_sign_provider.dart';
+import 'package:studyapp/services/sign_service.dart';
 
 class CoverPage extends StatelessWidget {
   const CoverPage({Key? key}) : super(key: key);
@@ -97,7 +100,8 @@ class CoverPage extends StatelessWidget {
                               BorderRadius.circular(FontConst.kSmallFont),
                         ),
                       ),
-                      onPressed: () {
+                      onPressed: () async {
+                        await SignService.clearUserData(context);
                         Navigator.pushNamedAndRemoveUntil(
                             context, '/secondPage', (route) => false);
                       },

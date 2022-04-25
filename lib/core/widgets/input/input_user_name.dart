@@ -26,10 +26,9 @@ class InputUserName extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(15.0),
           child: TextFormField(
-            keyboardType: TextInputType.text,
+            keyboardType: TextInputType.name,
             textInputAction: TextInputAction.next,
             controller: controller,
-            obscureText: isShowPassword,
             decoration: InputDecoration(
               hintText: hintText,
               border: OutlineInputBorder(

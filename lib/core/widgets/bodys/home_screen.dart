@@ -2,9 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:studyapp/core/constants/color_const.dart';
 import 'package:studyapp/core/constants/font_const.dart';
+import 'package:studyapp/services/sign_service.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+class HomeScreen extends StatefulWidget {
+  HomeScreen({Key? key}) : super(key: key);
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  var user;
+
+  @override
+  void initState() {
+    super.initState();
+    SignService.redUserData(context).then((value) {
+      user = value;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,10 +38,11 @@ class HomeScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Hi, Ali',
+                      "Hi",
                       style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: FontConst.kLargeFont),
+                        fontWeight: FontWeight.bold,
+                        fontSize: FontConst.kLargeFont,
+                      ),
                     ),
                     SvgPicture.asset('assets/icons/Vector.svg')
                   ],
@@ -188,7 +205,7 @@ class HomeScreen extends StatelessWidget {
             } else if (title == "Subjects") {
               Navigator.pushNamed(context, '/subjects');
             } else if (title == "Class") {
-              Navigator.pushNamed(context, '/course');
+              Navigator.pushNamed(context, '/class');
             } else if (title == "Presence") {
               Navigator.pushNamed(context, '/presences');
             }
@@ -206,7 +223,6 @@ class HomeScreen extends StatelessWidget {
   }
 
   // ? ??????
-
   Container infoCourseContainer({
     required String foiz,
     required String title,

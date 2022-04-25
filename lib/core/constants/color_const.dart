@@ -11,6 +11,7 @@ class ColorConst {
   static Color kNeutral = const Color(0xFF64748B);
   static Color kScondry = const Color(0xFF52B6DF);
   static Color kScondry100 = const Color(0xFFDCF0F9);
+  static Color kScondry500 = const Color(0xFF52B6DF);
 
   static Color kWarning500 = const Color(0xFFF59E0B);
   static Color kNeutral700 = const Color(0xFF334155);

@@ -10,4 +10,11 @@ class MyPath {
     'assets/icons/geography.svg',
     'assets/icons/chemical.svg',
   ];
+
+  static List<String> iconPathPersonAccount = [
+    'assets/icons/person.svg',
+    'assets/icons/account.svg',
+    'assets/icons/settings.svg',
+    'assets/icons/about.svg',
+  ];
 }

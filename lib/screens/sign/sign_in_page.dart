@@ -7,9 +7,8 @@ import 'package:studyapp/core/widgets/input/input_user_email.dart';
 import 'package:studyapp/core/widgets/input/input_user_password.dart';
 import 'package:studyapp/core/widgets/my_app_bar.dart';
 import 'package:studyapp/core/widgets/show_snack_bar.dart';
-import 'package:studyapp/providers/route_provider.dart';
 import 'package:studyapp/providers/user_sign_provider.dart';
-import 'package:studyapp/services/fire_service.dart';
+import 'package:studyapp/services/sign_service.dart';
 
 class SignIn extends StatelessWidget {
   SignIn({Key? key}) : super(key: key);
@@ -71,33 +70,17 @@ class SignIn extends StatelessWidget {
                 ),
                 onLongPress: () {
                   if (formKeySignIn.currentState!.validate()) {
-                    showDialog(
-                      context: context,
-                      builder: (_) => const AlertDialog(
-                        title:
-                            Center(child: CircularProgressIndicator.adaptive()),
-                      ),
-                    );
                     Navigator.pushNamedAndRemoveUntil(
                         context, '/admin', (route) => false);
                   }
                 },
-                onPressed: () {
+                onPressed: () async {
                   if (formKeySignIn.currentState!.validate()) {
-                    if (FireService.auth.currentUser!.email !=
-                        "azizadmin@gmail.com") {
-                      showDialog(
-                        context: context,
-                        builder: (_) => const AlertDialog(
-                          title: Center(
-                              child: CircularProgressIndicator.adaptive()),
-                        ),
-                      );
-                      context.read<SignProvider>().signInProvider(context);
-                    } else {
-                      ShowMySnackBar.mySnackBar(
-                          context, "There is no such mail");
-                    }
+                    await SignService.signInUser(context) == true
+                        ? Navigator.pushNamedAndRemoveUntil(
+                            context, '/home', (route) => false)
+                        : ShowMySnackBar.mySnackBar(
+                            context, "There is an error logging in");
                   }
                 },
               ),

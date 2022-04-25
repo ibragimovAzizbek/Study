@@ -11,6 +11,7 @@ import 'package:studyapp/core/widgets/my_app_bar.dart';
 import 'package:studyapp/core/widgets/show_snack_bar.dart';
 import 'package:studyapp/providers/check_provider.dart';
 import 'package:studyapp/providers/user_sign_provider.dart';
+import 'package:studyapp/services/sign_service.dart';
 
 class SignUp extends StatelessWidget {
   SignUp({Key? key}) : super(key: key);
@@ -90,18 +91,15 @@ class SignUp extends StatelessWidget {
                   MediaQuery.of(context).size.height * 0.08,
                 ),
               ),
-              onPressed: () {
+              onPressed: () async {
                 if (formKey.currentState!.validate()) {
                   if (Provider.of<CheckProvider>(context, listen: false)
                       .checkController) {
-                    showDialog(
-                      context: context,
-                      builder: (_) => const AlertDialog(
-                        title:
-                            Center(child: CircularProgressIndicator.adaptive()),
-                      ),
-                    );
-                    context.read<SignProvider>().registerProvider(context);
+                    await SignService.registerUser(context) == true
+                        ? Navigator.pushNamedAndRemoveUntil(
+                            context, '/home', (route) => false)
+                        : ShowMySnackBar.mySnackBar(
+                            context, "There is an error registering");
                   } else {
                     ShowMySnackBar.mySnackBar(context, 'Agree to the terms.');
                   }

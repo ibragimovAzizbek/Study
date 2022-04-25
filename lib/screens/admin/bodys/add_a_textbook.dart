@@ -8,6 +8,7 @@ import 'package:studyapp/providers/admin_catigory_provider.dart';
 class AddATextBook extends StatelessWidget {
   AddATextBook({Key? key}) : super(key: key);
 
+  TextEditingController subjectName = TextEditingController();
   TextEditingController unitInfo = TextEditingController();
 
   @override
@@ -67,6 +68,11 @@ class AddATextBook extends StatelessWidget {
           InputUserName(
             title: 'Subject name',
             hintText: 'Name',
+            controller: unitInfo,
+          ),
+          InputUserName(
+            title: 'Info unit',
+            hintText: 'Unit',
             controller: unitInfo,
           ),
           SizedBox(

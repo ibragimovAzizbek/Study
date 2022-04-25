@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:studyapp/core/constants/color_const.dart';
-import 'package:studyapp/providers/user_sign_provider.dart';
+import 'package:studyapp/core/widgets/show_snack_bar.dart';
+import 'package:studyapp/services/sign_service.dart';
 
 class MyAppBar extends StatelessWidget with PreferredSizeWidget {
   BuildContext context;
@@ -23,9 +23,10 @@ class MyAppBar extends StatelessWidget with PreferredSizeWidget {
                   Icons.logout_outlined,
                 ),
                 onPressed: () async {
-                  await context.read<SignProvider>().userLogOut();
-                  Navigator.pushNamedAndRemoveUntil(
-                      context, '/cover', (route) => false);
+                  await SignService.userLogOut() == true
+                      ? Navigator.pushNamedAndRemoveUntil(
+                          context, '/cover', (route) => false)
+                      : ShowMySnackBar.mySnackBar(context, "An error occurred");
                 },
               )
             : const SizedBox()
