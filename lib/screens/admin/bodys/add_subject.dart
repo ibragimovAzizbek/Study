@@ -3,7 +3,9 @@ import 'package:provider/provider.dart';
 import 'package:studyapp/core/constants/color_const.dart';
 import 'package:studyapp/core/constants/font_const.dart';
 import 'package:studyapp/core/widgets/input/input_user_name.dart';
+import 'package:studyapp/core/widgets/show_snack_bar.dart';
 import 'package:studyapp/providers/admin_catigory_provider.dart';
+import 'package:studyapp/services/admin/upload_subject_service.dart';
 
 class AddSubject extends StatelessWidget {
   AddSubject({Key? key}) : super(key: key);
@@ -39,7 +41,7 @@ class AddSubject extends StatelessWidget {
                     context.read<AdminPanelCatigory>().adminPanelCatigory(0);
                   },
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 40,
                   child: VerticalDivider(
                     color: ColorConst.kBlack,
@@ -74,12 +76,12 @@ class AddSubject extends StatelessWidget {
           InputUserName(
             title: 'Info course',
             hintText: 'Info',
-            controller: subjectName,
+            controller: subjectInfo,
           ),
           InputUserName(
             title: 'Course price',
             hintText: 'Price',
-            controller: subjectName,
+            controller: subjectPrice,
           ),
           SizedBox(
             height: FontConst.kExtraLargeFont,
@@ -102,10 +104,30 @@ class AddSubject extends StatelessWidget {
                 MediaQuery.of(context).size.height * 0.07,
               ),
             ),
-            onPressed: () {},
+            onPressed: () async {
+              await UploadSubject.uploadSubject(
+                        subjectName: subjectName.text,
+                        info: subjectInfo.text,
+                        price: subjectPrice.text,
+                      ) ==
+                      true
+                  ? ShowMySnackBar.mySnackBar(
+                      context,
+                      "SUCCESSFUL",
+                      color: ColorConst.kGreen,
+                    )
+                  : ShowMySnackBar.mySnackBar(context, "FAILED");
+              clearSubjectDataTextFormFiled();
+            },
           )
         ],
       ),
     );
+  }
+
+  clearSubjectDataTextFormFiled() {
+    subjectName.clear();
+    subjectInfo.clear();
+    subjectPrice.clear();
   }
 }

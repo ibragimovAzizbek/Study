@@ -25,7 +25,7 @@ class _HomePageState extends State<HomePage> {
       HomeScreen(),
       const CalendarScreen(),
       const Screen3Page(),
-      const PersonAccountScreen()
+      PersonAccountScreen()
     ];
   }
 

@@ -7,9 +7,11 @@ import 'package:studyapp/providers/bottom_bar_provider.dart';
 import 'package:studyapp/providers/calendar_icon_provider.dart';
 import 'package:studyapp/providers/catigory_provider_course.dart';
 import 'package:studyapp/providers/check_provider.dart';
+import 'package:studyapp/providers/gender_controller.dart';
 import 'package:studyapp/providers/route_provider.dart';
 import 'package:studyapp/providers/user_sign_provider.dart';
 import 'package:studyapp/routes/my_route.dart';
+import 'package:studyapp/services/admin/upload_lesson_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,6 +27,8 @@ void main() async {
         ChangeNotifierProvider(
             create: ((context) => CalendarIconSetProvider())),
         ChangeNotifierProvider(create: ((context) => AdminPanelCatigory())),
+        ChangeNotifierProvider(create: ((context) => GenderControllerProvider())),
+        ChangeNotifierProvider(create: ((context) => UploadLesson())),
       ],
       child: MyApp(),
     ),
@@ -34,8 +38,6 @@ void main() async {
 class MyApp extends StatelessWidget {
   MyApp({Key? key}) : super(key: key);
 
-  final MyRoute _myRoute = MyRoute();
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -43,7 +45,7 @@ class MyApp extends StatelessWidget {
       title: 'Study app',
       theme: ThemeComp.themeComp,
       initialRoute: context.watch<RouteProvider>().route,
-      onGenerateRoute: _myRoute.onGenerateRoute,
+      onGenerateRoute: MyRoute.instance.onGenerateRoute,
     );
   }
 }

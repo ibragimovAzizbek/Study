@@ -15,13 +15,16 @@ class ColorConst {
 
   static Color kWarning500 = const Color(0xFFF59E0B);
   static Color kNeutral700 = const Color(0xFF334155);
+  static Color kNeutral300 = const Color(0xFFCBD5E1);
   static Color kWarning100 = const Color(0xFFFCE2B6);
   static Color kNeutral900 = const Color(0xFF0F172A);
 
   static Color kTransparentColor = Colors.transparent;
 
-  static Color kBlack = Colors.black;
+  static const Color kBlack = Colors.black;
+  static Color kNoDataShimmer = Colors.black.withOpacity(0.04);
   static const Color kRed = Colors.red;
+  static Color kGreen = const Color.fromARGB(255, 7, 112, 12);
 
   static Gradient kPrimaryGradientColor = LinearGradient(
     begin: Alignment.topCenter,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:studyapp/screens/account/profile_page.dart';
 import 'package:studyapp/screens/admin/admin_page.dart';
 import 'package:studyapp/screens/catigorys/course_page.dart';
 import 'package:studyapp/screens/catigorys/presences_page.dart';
@@ -10,6 +11,11 @@ import 'package:studyapp/screens/sign/sign_in_page.dart';
 import 'package:studyapp/screens/sign/sign_up_page.dart';
 
 class MyRoute {
+  static final MyRoute _instance = MyRoute._init();
+  static MyRoute get instance => _instance;
+
+  MyRoute._init();
+
   Route? onGenerateRoute(RouteSettings settings) {
     var args = settings.arguments;
 
@@ -31,7 +37,19 @@ class MyRoute {
       case '/subjects':
         return MaterialPageRoute(builder: (_) => SubjectsPage());
       case '/presences':
-        return MaterialPageRoute(builder: (_) => PresencesPage());
+        return MaterialPageRoute(builder: (_) => const PresencesPage());
+      case '/account0':
+        return MaterialPageRoute(builder: (_) => ProfilePage());
+      case '/account1':
+        return MaterialPageRoute(builder: (_) => const PresencesPage());
+      case '/account2':
+        return MaterialPageRoute(builder: (_) => const PresencesPage());
+      case '/account3':
+        return MaterialPageRoute(builder: (_) => const PresencesPage());
     }
+  }
+
+  easyNavigate(Widget page) {
+    return MaterialPageRoute(builder: (_) => page);
   }
 }

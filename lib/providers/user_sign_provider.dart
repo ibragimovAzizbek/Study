@@ -5,5 +5,6 @@ class SignProvider extends ChangeNotifier {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController phoneNumberController = TextEditingController();
-  Map<String, dynamic>? data;
+  TextEditingController dataBirthController = TextEditingController();
+  // Map<String, dynamic>? data;
 }

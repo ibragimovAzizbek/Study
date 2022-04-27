@@ -11,7 +11,7 @@ import 'package:studyapp/core/widgets/my_app_bar.dart';
 import 'package:studyapp/core/widgets/show_snack_bar.dart';
 import 'package:studyapp/providers/check_provider.dart';
 import 'package:studyapp/providers/user_sign_provider.dart';
-import 'package:studyapp/services/sign_service.dart';
+import 'package:studyapp/services/sign_up_service.dart';
 
 class SignUp extends StatelessWidget {
   SignUp({Key? key}) : super(key: key);
@@ -95,7 +95,7 @@ class SignUp extends StatelessWidget {
                 if (formKey.currentState!.validate()) {
                   if (Provider.of<CheckProvider>(context, listen: false)
                       .checkController) {
-                    await SignService.registerUser(context) == true
+                    await SignUpService.registerUser(context) == true
                         ? Navigator.pushNamedAndRemoveUntil(
                             context, '/home', (route) => false)
                         : ShowMySnackBar.mySnackBar(

@@ -1,15 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:studyapp/core/constants/color_const.dart';
 import 'package:studyapp/core/constants/font_const.dart';
 import 'package:studyapp/core/widgets/input/input_user_name.dart';
 import 'package:studyapp/providers/admin_catigory_provider.dart';
+import 'package:studyapp/services/admin/upload_lesson_service.dart';
 
 class AddATextBook extends StatelessWidget {
   AddATextBook({Key? key}) : super(key: key);
 
   TextEditingController subjectName = TextEditingController();
+  TextEditingController lessonTheme = TextEditingController();
   TextEditingController unitInfo = TextEditingController();
+  TextEditingController unit = TextEditingController();
+
+  XFile? vedio;
+  final _picker = ImagePicker();
+
+  bool statusCourseUpload = false;
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +47,7 @@ class AddATextBook extends StatelessWidget {
                     context.read<AdminPanelCatigory>().adminPanelCatigory(0);
                   },
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 40,
                   child: VerticalDivider(
                     color: ColorConst.kBlack,
@@ -54,7 +63,7 @@ class AddATextBook extends StatelessWidget {
                         : ColorConst.kPrimaryColor100,
                     elevation: 0,
                     label: const Text(
-                      "Add a textbook",
+                      "Add a lesson",
                     ),
                   ),
                   onTap: () {
@@ -68,19 +77,42 @@ class AddATextBook extends StatelessWidget {
           InputUserName(
             title: 'Subject name',
             hintText: 'Name',
-            controller: unitInfo,
+            controller: subjectName,
+          ),
+          InputUserName(
+            title: 'Lesson theme',
+            hintText: 'Lesson theme',
+            controller: lessonTheme,
+          ),
+          InputUserName(
+            title: 'Unit',
+            hintText: 'Unit',
+            controller: unit,
           ),
           InputUserName(
             title: 'Info unit',
-            hintText: 'Unit',
+            hintText: 'Unit Info',
             controller: unitInfo,
           ),
-          SizedBox(
-            height: FontConst.kExtraLargeFont,
+          SizedBox(height: FontConst.kExtraLargeFont),
+          TextButton(
+            child: const Text("Upload vedio"),
+            onPressed: () async {
+              vedio = await _picker.pickVideo(source: ImageSource.gallery);
+
+              statusCourseUpload =
+                  await context.read<UploadLesson>().uploadVedioLessonToStorage(
+                        vedio!,
+                        subjectName: subjectName.text,
+                        lessonName: lessonTheme.text,
+                        unit: unit.text,
+                        unitInfo: unitInfo.text,
+                      );
+            },
           ),
           ElevatedButton(
             child: Text(
-              "Upload textbook",
+              "Upload lesson",
               style: TextStyle(
                 fontSize: FontConst.kLargeFont,
               ),
@@ -96,10 +128,19 @@ class AddATextBook extends StatelessWidget {
                 MediaQuery.of(context).size.height * 0.07,
               ),
             ),
-            onPressed: () {},
+            onPressed: statusCourseUpload == false ? null : () async {
+              
+            },
           )
         ],
       ),
     );
+  }
+
+  clearTextFromFiled() {
+    subjectName.clear();
+    lessonTheme.clear();
+    unit.clear();
+    unitInfo.clear();
   }
 }

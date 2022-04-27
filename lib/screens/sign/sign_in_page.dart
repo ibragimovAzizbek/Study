@@ -8,7 +8,7 @@ import 'package:studyapp/core/widgets/input/input_user_password.dart';
 import 'package:studyapp/core/widgets/my_app_bar.dart';
 import 'package:studyapp/core/widgets/show_snack_bar.dart';
 import 'package:studyapp/providers/user_sign_provider.dart';
-import 'package:studyapp/services/sign_service.dart';
+import 'package:studyapp/services/sign_in_service.dart';
 
 class SignIn extends StatelessWidget {
   SignIn({Key? key}) : super(key: key);
@@ -76,7 +76,7 @@ class SignIn extends StatelessWidget {
                 },
                 onPressed: () async {
                   if (formKeySignIn.currentState!.validate()) {
-                    await SignService.signInUser(context) == true
+                    await SignInService.signInUser(context) == true
                         ? Navigator.pushNamedAndRemoveUntil(
                             context, '/home', (route) => false)
                         : ShowMySnackBar.mySnackBar(
